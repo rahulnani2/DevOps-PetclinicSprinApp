@@ -20,12 +20,12 @@ Monitoring - Azure Monitor, Log Analytics Workspace
 
 
 ## Architecture Diagram 
-![High Level Architecture Diagram] (Architectures/DevOpsFlagship-Highlevel Architecture)
+![High Level Architecture Diagram](Architectures/DevOpsFlagship-Highlevel Architecture)
 
 
 
 
-Project Strucutre (GitHub Repo Layout)
+## Project Strucutre (GitHub Repo Layout)
 
 Azure-Enterprise-Infra/
 │
