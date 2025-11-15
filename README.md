@@ -2,7 +2,7 @@
 
 - [Project Overview](#project-overview)
 - [Goal](#Goal)
-- [Architecure Diagram](#High-level-Architecture)
+- [Architecture Diagram](#High-level-Architecture)
 - [CI/CD Workflow](#CICD-Workflow)
 - [Project Directory Structure](#Directory-Structure)
 
