@@ -1,10 +1,18 @@
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Goal](#Goal)
+- [Architecure Diagram](#High-level-Architecture)
+- [CI/CD Workflow](#CICD-Workflow)
+- [Project Directory Structure](#Directory-Structure)
+## Project Overview
 # DevOpsFlagShip
 Enterprise level DevOps project with Azure + Terraform 
 
 Puprose of the Repository
 Enterprise Infrastrucutre on Azure with Terraform, Azure Kubernetes Service, Azure App Servcice, Azure SQL CI/CD
 
-Goal : 
+## Goal : 
 Deploy a production ready application(frontend + Backend) on Azure using Terraform and Azure DevOps Pipelines with enterprise grade networking, security and Monitoring
 
 Frontend -- Deployed on Azure App Service 
@@ -24,7 +32,7 @@ Monitoring - Azure Monitor, Log Analytics Workspace
 
 
 ## CI/CD Workflow for Application and Infrastructure deployments
-![CI/CD Workflows](Architectures/DevOpsFlagship-HighlevelArchitecture.png)
+![CI/CD Workflows](Architectures/DevOpsFlagship-CICDWorkflow.png)
 
 
 ## Project Directory Strucutre (GitHub Repo Layout)
