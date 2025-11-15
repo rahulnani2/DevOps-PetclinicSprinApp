@@ -35,7 +35,7 @@ Monitoring - Azure Monitor, Log Analytics Workspace
 ![CI/CD Workflows](Architectures/DevOpsFlagship-CICDWorkflow.png)
 
 
-## Project Directory Structure (GitHub Repo Layout)
+## Project Directory Structure
 
 Azure-Enterprise-Infra/
 ```│
