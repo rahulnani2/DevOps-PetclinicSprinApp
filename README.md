@@ -27,7 +27,7 @@ Security - Azure Key Vault, NSG Managed Identity
 Monitoring - Azure Monitor, Log Analytics Workspace
 
 
-## Architecture Diagram 
+## Architecture Diagram
 ![High Level Architecture Diagram](Architectures/DevOpsFlagship-HighlevelArchitecture.png)
 
 
@@ -35,7 +35,7 @@ Monitoring - Azure Monitor, Log Analytics Workspace
 ![CI/CD Workflows](Architectures/DevOpsFlagship-CICDWorkflow.png)
 
 
-## Project Directory Strucutre (GitHub Repo Layout)
+## Project Directory Structure (GitHub Repo Layout)
 
 Azure-Enterprise-Infra/
 ```│
