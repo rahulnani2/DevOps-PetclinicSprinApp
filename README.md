@@ -17,15 +17,16 @@ Deploy a production ready application(frontend + Backend) on Azure using Terrafo
 
 Frontend -- Deployed on Azure App Service 
 Backend  --  
-  Service A (User API)  --> Hosted on Azure VMs
-  Serice  B (Orders API)  --> deployed on Azure AKS
-Database -- Azure Sql Server
+  Service A (User API)  --> Hosted on Azure VMs  
+  Serice  B (Orders API)  --> deployed on Azure AKS  
+  Database -- Azure Sql Server
 
-Infrastrucutre Management - Terraform modules + Remote backend
-CI/CD - Azure DevOps Pipelines (Build + Release stages)
-Security - Azure Key Vault, NSG Managed Identity
+Infrastrucutre Management - Terraform modules + Remote backend  
+CI/CD - Azure DevOps Pipelines (Build + Release stages)  
+Security - Azure Key Vault, NSG Managed Identity  
 Monitoring - Azure Monitor, Log Analytics Workspace
 
+Add Obeservability for centralised logging and Metrics collection. follow the linkedIN article (https://www.linkedin.com/feed/update/urn:li:activity:7395095520207171595?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7395095520207171595%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29)
 
 ## Architecture Diagram
 ![High Level Architecture Diagram](Architectures/DevOpsFlagship-HighlevelArchitecture.png)
