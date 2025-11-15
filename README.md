@@ -20,7 +20,9 @@ Monitoring - Azure Monitor, Log Analytics Workspace
 
 
 ## Architecture Diagram 
-![High Level Architecture Diagram](diagrams/DevOpsFlagship-Highlevel Architecture)
+![High Level Architecture Diagram](Architectures/DevOpsFlagship-Highlevel Architecture.png)
+
+
 
 
 
