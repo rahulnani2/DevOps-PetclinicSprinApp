@@ -20,15 +20,16 @@ Monitoring - Azure Monitor, Log Analytics Workspace
 
 
 ## Architecture Diagram 
-![High Level Architecture Diagram](Architectures/DevOpsFlagship-CICDWorkflow.png)
+![High Level Architecture Diagram](Architectures/DevOpsFlagship-HighlevelArchitecture.png)
 
 
+## CI/CD Workflow for Application and Infrastructure deployments
+![CI/CD Workflows](Architectures/DevOpsFlagship-HighlevelArchitecture.png)
 
 
+## Project Directory Strucutre (GitHub Repo Layout)
 
-## Project Strucutre (GitHub Repo Layout)
-
-Azure-Enterprise-Infra/
+```Azure-Enterprise-Infra/
 │
 ├── README.md                      # Project documentation
 ├── architecture/
@@ -61,5 +62,5 @@ Azure-Enterprise-Infra/
 └── docs/
     ├── setup_guide.md
     ├── terraform_walkthrough.md
-    └── ci_cd_pipeline_steps.md
+    └── ci_cd_pipeline_steps.md```
 
