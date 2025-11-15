@@ -29,8 +29,8 @@ Monitoring - Azure Monitor, Log Analytics Workspace
 
 ## Project Directory Strucutre (GitHub Repo Layout)
 
-```Azure-Enterprise-Infra/
-│
+Azure-Enterprise-Infra/
+```│
 ├── README.md                      # Project documentation
 ├── architecture/
 │   └── enterprise-diagram.png     # Architecture diagram
