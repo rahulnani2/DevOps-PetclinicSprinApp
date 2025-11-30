@@ -39,7 +39,7 @@ stages:
            command: 'validate'
            workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
 - stage: Dev_deploy
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'petclinic-app-feature/Azure-Infra-pipelines'))
   jobs: 
     - job: terrafom_apply_dev
       pool:
