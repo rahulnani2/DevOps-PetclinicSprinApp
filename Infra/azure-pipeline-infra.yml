@@ -17,7 +17,7 @@ stages:
   jobs: 
     - job: tf_validate
       pool:
-       vmImage: ubuntu-latest
+       name: SelfHostedPool
       steps: 
        - task: TerraformInstaller@1
          inputs:
@@ -43,7 +43,7 @@ stages:
   jobs: 
     - job: terrafom_apply_dev
       pool:
-       vmImage: ubuntu-latest  
+        name: SelfHostedPool  
       steps: 
        - task: TerraformInstaller@1
          inputs:
