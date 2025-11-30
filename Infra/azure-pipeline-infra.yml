@@ -39,6 +39,11 @@ trigger:
           provider: 'azurerm'
           command: 'validate'
           workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+  - stage: Dev_deploy
+    condition: and(succedeed(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs: terrafom_apply_dev
+    pool:
+      vmImage: ubuntu-latest     
 
 steps:
 - script: echo Hello, world!
