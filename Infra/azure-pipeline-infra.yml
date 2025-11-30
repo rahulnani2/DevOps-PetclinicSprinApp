@@ -32,7 +32,7 @@ stages:
            backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
            backendAzureRmStorageAccountName: 'devtfstatespetclinic'
            backendAzureRmContainerName: 'terraformstaefiles'
-           backendAzureRmKey: 'dev-petclinicstatefile.tfstate'
+           backendAzureRmKey: 'dev-petclinicstatefile01.tfstate'
        - task: TerraformTask@5
          inputs:
            provider: 'azurerm'
@@ -58,7 +58,7 @@ stages:
            backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
            backendAzureRmStorageAccountName: 'devtfstatespetclinic'
            backendAzureRmContainerName: 'terraformstaefiles'
-           backendAzureRmKey: 'dev-petclinicstatefile.tfstate'
+           backendAzureRmKey: 'dev-petclinicstatefile01.tfstate'
        - task: TerraformTask@5
          inputs:
            provider: 'azurerm'
