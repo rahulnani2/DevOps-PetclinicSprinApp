@@ -53,10 +53,10 @@ stages:
       pool:
         name: SelfHostedPool  
       steps: 
-       - task: TerraformInstaller@1
+        - task: TerraformInstaller@1
 =======
       - task: TerraformInstaller@1
-        inputs:
+         inputs:
           terraformVersion: 'latest'
       - task: TerraformTask@5
         inputs:
