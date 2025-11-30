@@ -1,0 +1,20 @@
+# Step1 : Apiversion 
+apiVersion: v1
+
+# ConfigMap is a non sensitive configuration data. 
+# Perfect for storing: 
+# Application settings, Environment variables, URLS, Spring profiles 
+kind: ConfigMap
+
+# Step3 : Metadata - Reference this name in spring boot deployment when injecting these values as environment variables
+metadata:
+  name: petclinic-springconfig
+
+# Step 4: Data Section contains key-value pairs that hold your application configuration 
+# jdbc Url 
+# JPA_HIBERNATE controls how HIbernate handles database schema changes
+data:
+  MYSQL_HOST: mysql-service
+  MYSQL_DATABASE: petclinic
+  MYSQL_USER: petclinic
+  SPRING_PROFILES_ACTIVE: mysql

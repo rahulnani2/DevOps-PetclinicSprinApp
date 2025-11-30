@@ -1,0 +1,49 @@
+#This is a mysql deployment file for deploying the Mysql pods 
+# apiVersion  - Stable version of API for deployments, whcih manag Pods declaratively 
+apiVersion: apps/v1
+
+# kind - Deployment- Manages desired number of replicaas of a Pod are running and manages updates, rollbacks and scaling
+kind: Deployment
+
+# metadata: Kubernetes identifies and manages the deployment with name 
+metadata:
+  name: petclinic-app-deployment
+
+# Spec: 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petclinic-springapp
+  template:
+    metadata:
+      labels:
+        app: petclinic-springapp
+    spec:
+      containers:
+        - name: petclinic-frontend
+          image: petclinicimages.azurecr.io/petclinic-app:v2
+          ports:
+            - containerPort: 8080
+          
+          env:      
+           # Inject values from ConfigMap
+           - name: MYSQL_HOST
+             value: "mysql-service"
+
+           - name: MYSQL_DATABASE
+             value: petclinic
+
+           - name: MYSQL_USER
+             value: petclinic
+           
+           - name: SPRING_PROFILES_ACTIVE
+             value: mysql
+
+          # PASSWORD Should come from secret  
+
+           - name: MYSQL_PASSWORD
+             valueFrom:
+               secretKeyRef:
+                  name: mysql-secret
+                  key:  mysql-password

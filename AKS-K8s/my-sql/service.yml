@@ -1,0 +1,22 @@
+# Kubernetes API
+apiVersion: v1
+
+# Declares the object as a Service which provides networking for Pods. Pods are ephimeral 
+# Service provides a stable networking endpoint so other pods or application can Access Mysql reliably
+kind: Service 
+
+# Name of the mysql service. This name is used to reference the Service within the cluster(Other pods can connect to mysql using service)
+metadata: 
+  name: mysql-service
+spec: 
+  # Selector tell the Service which Pods to route traffic to. Below it selects pod label app:petclinic-mysql from Sql Deployment
+  # Kubernetes automatically forwards traffic to all matching Pods - This is how service knows which Pod it manages
+  selector:
+    app: petclinic-mysql
+  # The port that the Service exposes inside the Cluster. Other pods connect to this port
+  # targetPort : Port on the container that Service Forwards traffic to   
+  ports:
+    - port: 3306
+      targetPort: 3306
+  # Exposes the Service internally within the K8s cluster. Pods can access it. But its not accessible from outside the cluster    
+  type: ClusterIP

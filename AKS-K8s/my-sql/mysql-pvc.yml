@@ -1,0 +1,28 @@
+# This file create Persistent volume for my sql persistent storage
+# Apiversion
+apiVersion: v1
+
+# Kind of object is Persistent volume claim 
+# PVC is a persistent storage in kubernetes. 
+# It allows Pod to claim storage dynamically from Persistenvt Volume without worrying about underlying storgae details
+kind: PersistentVolumeClaim
+
+#metadata , name of the pvc
+metadata:
+  name: mysql-pvc01
+
+# Spec define - Kind of storage we want 
+
+spec:
+  # The Volume can be mounted as read-write by a single node(for data integrity for Sql instance)
+  accessModes:
+    - ReadWriteOnce
+  # Requests a specific amount of storage for the PVC. K8's will allocate a PV that satisifes this request  
+  resources:
+    requests:
+      storage: 5Gi
+# Azure AKS uses default storage classes if not specified. i.e Azure provisions Azure Managed disks automatically 
+# We can specify a different storgae class for premium SSD and Standard HDD or zone-redundant disks if needed
+# The actual storage type, performace and availability are determined by the Storgaeclass if specified
+
+

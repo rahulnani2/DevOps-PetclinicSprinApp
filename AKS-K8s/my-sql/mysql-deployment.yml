@@ -1,0 +1,74 @@
+# This is a mysql deployment file for deploying the Mysql pods 
+# apiVersion  - Stable version of API for deployments, which manages Pods declaratively 
+apiVersion: apps/v1 
+
+# kind - Deployment- Manages desired number of replicas of a Pod are running and manages updates, rollbacks and scaling
+kind: Deployment
+
+#metadata - Kubernetes identifies and manages the deployment with name 
+metadata:
+   name: mysql-deployment
+
+#spec - 1 is typical for Mysql because mysql stores data locally and doesnt support multiple write replicas without clustering
+spec:
+  replicas: 1
+  # Selector define which pods belong to this deployment, Important for matching Pods to Replicasets
+  # Pods with label app:petclinic-mysql are managed by this deployment
+  selector:
+    matchLabels:
+      app: petclinic-mysql
+  # template : defines the Pod template for deployment 
+  # metadata.labels : must match the selector. So the deployment can manage Pods correctly    
+  template:
+    metadata:
+      labels:
+        app: petclinic-mysql
+  # spec.containers: Define Container inside the Pod. name--> Container name . image --> mysql image and ports:mysql ports     
+    spec:
+      containers:
+        - name: petclinic-mysql
+          image: mysql:8.0
+          ports:
+            - containerPort: 3306
+          env:
+          # My sql reads the environment variables at startup
+          # Set environment variables for container. Mysql reads at startupto initialize the database.
+          # The secrets are taken from the mysql-secret
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: mysql-root-password
+          - name: MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: mysql-database
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                 name: mysql-secret
+                 key: mysql-user
+          - name: MYSQL_PASSWORD                      
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: mysql-password     
+          # Mounts the volume inside the container , mountPath --> default Mysql datadirectory inside the container        
+          volumeMounts:
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d
+            - name: petclinic-mysqldata
+              mountPath: /var/lib/mysql
+          # Connects the pod to DB init config map to run the DB init scripts     
+  # Connects the Pod to Persistent Volume Claim. Cliam Name from the pvc file.            
+      volumes:
+        - name: petclinic-mysqldata
+          persistentVolumeClaim:
+             claimName: mysql-pvc01
+        
+        - name: initdb
+          configMap:
+             name: mysql-initdb-scripts     
+
+                 
