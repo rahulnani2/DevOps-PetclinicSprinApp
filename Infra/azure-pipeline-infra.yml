@@ -20,9 +20,25 @@ trigger:
       pool:
         vmImage: ubuntu-latest
       steps: 
-      
-pool:
-  vmImage: ubuntu-latest
+      - task: TerraformInstaller@1
+        inputs:
+          terraformVersion: 'latest'
+      - task: TerraformTask@5
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+          backendAzureRmUseEntraIdForAuthentication: false
+          backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+          backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
+          backendAzureRmStorageAccountName: 'devtfstatespetclinic'
+          backendAzureRmContainerName: 'terraformstaefiles'
+          backendAzureRmKey: 'dev-petclinicstatefile.tfstate'
+      - task: TerraformTask@5
+        inputs:
+          provider: 'azurerm'
+          command: 'validate'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
 
 steps:
 - script: echo Hello, world!
