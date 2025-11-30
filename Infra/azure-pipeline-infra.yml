@@ -64,5 +64,7 @@ stages:
            provider: 'azurerm'
            command: 'apply'
            workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
-           commandOptions: '--auto-approve'
+           commandOptions: 
+              -var "subscription_id=$(SUBSCRIPTION_id)"
+              --auto-approve
            environmentServiceNameAzureRM: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
