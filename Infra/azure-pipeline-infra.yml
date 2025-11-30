@@ -13,43 +13,57 @@ trigger:
       - Infra/*
       - Infra/Terraform/*
 
-  stages:
-  - stage: TerraformValidate
-    jobs: 
+stages:
+- stage: TerraformValidate
+  jobs: 
     - job: tf_validate
       pool:
-        vmImage: ubuntu-latest
+       vmImage: ubuntu-latest
       steps: 
-      - task: TerraformInstaller@1
-        inputs:
+       - task: TerraformInstaller@1
+         inputs:
           terraformVersion: 'latest'
-      - task: TerraformTask@5
-        inputs:
-          provider: 'azurerm'
-          command: 'init'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
-          backendAzureRmUseEntraIdForAuthentication: false
-          backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
-          backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
-          backendAzureRmStorageAccountName: 'devtfstatespetclinic'
-          backendAzureRmContainerName: 'terraformstaefiles'
-          backendAzureRmKey: 'dev-petclinicstatefile.tfstate'
-      - task: TerraformTask@5
-        inputs:
-          provider: 'azurerm'
-          command: 'validate'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
-  - stage: Dev_deploy
-    condition: and(succedeed(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-    jobs: terrafom_apply_dev
-    pool:
-      vmImage: ubuntu-latest     
-
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+       - task: TerraformTask@5
+         inputs:
+           provider: 'azurerm'
+           command: 'init'
+           workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+           backendAzureRmUseEntraIdForAuthentication: false
+           backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+           backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
+           backendAzureRmStorageAccountName: 'devtfstatespetclinic'
+           backendAzureRmContainerName: 'terraformstaefiles'
+           backendAzureRmKey: 'dev-petclinicstatefile.tfstate'
+       - task: TerraformTask@5
+         inputs:
+           provider: 'azurerm'
+           command: 'validate'
+           workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+- stage: Dev_deploy
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  jobs: 
+    - job: terrafom_apply_dev
+      pool:
+       vmImage: ubuntu-latest  
+      steps: 
+       - task: TerraformInstaller@1
+         inputs:
+          terraformVersion: 'latest'
+       - task: TerraformTask@5
+         inputs:
+           provider: 'azurerm'
+           command: 'init'
+           workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+           backendAzureRmUseEntraIdForAuthentication: false
+           backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+           backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
+           backendAzureRmStorageAccountName: 'devtfstatespetclinic'
+           backendAzureRmContainerName: 'terraformstaefiles'
+           backendAzureRmKey: 'dev-petclinicstatefile.tfstate'
+       - task: TerraformTask@5
+         inputs:
+           provider: 'azurerm'
+           command: 'apply'
+           workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+           commandOptions: '--auto-approve'
+           environmentServiceNameAzureRM: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
