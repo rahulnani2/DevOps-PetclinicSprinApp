@@ -46,3 +46,13 @@ out/
 _site/
 *.css
 !petclinic.css
+
+# Ignore Terraform local state, cache, providers
+**/.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+terraform.tfvars
+*.tfplan
