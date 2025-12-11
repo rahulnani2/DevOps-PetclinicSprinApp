@@ -14,6 +14,6 @@ resource "azuread_service_principal" "azadsp01" {
 }
 
 resource "azuread_service_principal_password" "azadsppasswd01" {
-  depends_on=[azuread_application.azapp01,azuread_service_principal.azadsp01]
+  depends_on=[azuread_application.azapp01, azuread_service_principal.azadsp01]
   service_principal_id = azuread_service_principal.azadsp01.id
 }
