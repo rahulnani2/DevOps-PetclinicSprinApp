@@ -3,16 +3,8 @@
 data "azuread_client_config" "azclconfig01" {}
 
 resource "azuread_application" "azapp01" {
-   display_name = var.service_principal_name 
- #  owners = [ data.azuread_client_config.azclconfig01.object_id] 
-  lifecycle {
-    ignore_changes = [ owners ]
-  }
-}
-
-resource "time_sleep" "wait_for_app" {
-   depends_on = [ azuread_application.azapp01 ]
-   create_duration = "90s"
+   display_name = var.service_principal_name
+   owners = [ data.azuread_client_config.azclconfig01.object_id]
 }
 
 resource "azuread_service_principal" "azadsp01" {
