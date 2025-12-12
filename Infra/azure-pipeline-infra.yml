@@ -96,33 +96,9 @@ stages:
          displayName: 'Terraform Apply'
          inputs:
            provider: 'azurerm'
-           command: 'apply'
+           command: 'destroy'
            workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
            commandOptions: 
               -var "subscription_id=$(SUBSCRIPTION_id)"
               --auto-approve
            environmentServiceNameAzureRM: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'  
-
-- stage: Dev_DestroyTerraformResource
-  displayName: 'Manual Trigger to Destroy terraform resources'
-  dependsOn: Dev_deploy
-  condition: succeeded()
-  
-  jobs:
-  - deployment: destory
-    environment: "Manual Terraform Destroy" 
-  - job: 'ManualApproval'
-    displayName: 'Approve Terraform Destroy' 
-    pool:
-     name: SelfHostedPool
-     
-    steps: 
-    - task: TerraformTask@5
-      inputs:
-        provider: 'azurerm'
-        command: 'destroy'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
-        commandOptions: 
-          -var "subscription_id=$(SUBSCRIPTION_id)" 
-          --auto-approve
-        environmentServiceNameAzureRM: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
