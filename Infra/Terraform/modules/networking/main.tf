@@ -6,6 +6,7 @@ resource "azurerm_virtual_network" "azvnet01" {
 }
 
 resource "azurerm_subnet" "azsubnet01" {
+ depends_on=[azurerm_virtual_network.azvnet01]
   for_each = var.subnets
   name = each.value.name
   resource_group_name = var.resource_group_name
@@ -14,6 +15,7 @@ resource "azurerm_subnet" "azsubnet01" {
 }
 
 resource "azurerm_network_security_group" "aznsg01" {
+depends_on=[azurerm_subnet.azsubnet01]
   name = var.network_security_group_name
   location = var.location
   resource_group_name = var.resource_group_name
