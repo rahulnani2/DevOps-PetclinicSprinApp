@@ -12,7 +12,7 @@ resource "time_sleep" "wait_for_application" {
 }
 
 resource "azuread_service_principal" "azadsp01" {
-   depends_on=[time_sleep.wait_for_application]
+   depends_on=[time_sleep.wait_for_application, azuread_application.azapp01]
    app_role_assignment_required = true
    client_id = azuread_application.azapp01.client_id
    owners = [ data.azuread_client_config.azclconfig01.object_id ]
