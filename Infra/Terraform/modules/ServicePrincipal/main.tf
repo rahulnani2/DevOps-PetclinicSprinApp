@@ -18,6 +18,9 @@ resource "azuread_service_principal" "azadsp01" {
    #app_role_assignment_required = true
    client_id = azuread_application.azapp01.client_id
    use_existing = true
+   timeouts{ 
+    create = "15m"  
+   }
  #  owners = [ data.azuread_client_config.azclconfig01.object_id ] 
 
 }  
