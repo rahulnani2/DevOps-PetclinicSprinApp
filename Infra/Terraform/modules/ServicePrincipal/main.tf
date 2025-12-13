@@ -9,8 +9,11 @@ resource "azuread_application" "azapp01" {
 resource "azuread_service_principal" "azadsp01" {
    app_role_assignment_required = true
    client_id = azuread_application.azapp01.client_id
- #  owners = [ data.azuread_client_config.azclconfig01.object_id ]
+ #  owners = [ data.azuread_client_config.azclconfig01.object_id ] 
+
 }  
+
+
 
 resource "azuread_service_principal_password" "azadsppasswd01" {
   depends_on=[azuread_application.azapp01, azuread_service_principal.azadsp01]

@@ -41,6 +41,7 @@ module "ServicePrinicpal01" {
 }
 
 module "petclinicacr" {
+  depends_on = [module.ServicePrinicpal01]
    source = "../modules/acr"
    acr_name = "petclinicimages"
    resource_group_name = azurerm_resource_group.pgrg01.name
@@ -48,6 +49,7 @@ module "petclinicacr" {
 } 
 
 resource "azurerm_role_assignment" "azacrpullrole" {
+  depends_on = [module.ServicePrinicpal01, module.petclinicacr]
   scope = module.petclinicacr.acr_id
   role_definition_name = "AcrPull"
   principal_id = module.ServicePrinicpal01.service_principal_objectid
