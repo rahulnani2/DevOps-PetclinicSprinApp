@@ -105,3 +105,56 @@ stages:
               -var "subscription_id=$(SUBSCRIPTION_id)"
               --auto-approve
            environmentServiceNameAzureRM: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'  
+- stage: ResourceDestroy
+  jobs: 
+    - job: terrafom_destroy_dev
+      pool:
+        name: SelfHostedPool  
+      steps: 
+       - task: TerraformInstaller@1
+         inputs:
+          terraformVersion: 'latest'
+       - task: TerraformTask@5
+         inputs:
+           provider: 'azurerm'
+           command: 'init'
+           workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+           backendAzureRmUseEntraIdForAuthentication: false
+           backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+           backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
+           backendAzureRmStorageAccountName: 'devtfstatespetclinic'
+           backendAzureRmContainerName: 'terraformstaefiles'
+           backendAzureRmKey: 'dev-petclinicstatefile01.tfstate'
+       - task: TerraformTask@5
+         inputs:
+           provider: 'azurerm'
+           command: 'apply'
+           workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+           commandOptions: 
+              -var "subscription_id=$(SUBSCRIPTION_id)"
+              --auto-approve
+           environmentServiceNameAzureRM: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'  
+
+- stage: Dev_DestroyTerraformResource
+  displayName: 'Manual Trigger to Destroy terraform resources'
+  dependsOn: ResourceDestroy
+  condition: succeeded()
+  
+  jobs:
+  - deployment: destory
+    environment: "Manual Terraform Destroy" 
+  - job: 'ManualApproval'
+    displayName: 'Approve Terraform Destroy' 
+    pool:
+     name: SelfHostedPool
+     
+    steps: 
+    - task: TerraformTask@5
+      inputs:
+        provider: 'azurerm'
+        command: 'destroy'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+        commandOptions: 
+          -var "subscription_id=$(SUBSCRIPTION_id)" 
+          --auto-approve
+        environmentServiceNameAzureRM: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
