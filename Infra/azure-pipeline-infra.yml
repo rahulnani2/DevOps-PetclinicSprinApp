@@ -28,7 +28,7 @@ stages:
            command: 'init'
            workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
            backendAzureRmUseEntraIdForAuthentication: false
-           backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+           backendServiceArm: 'Azure subscription 1(1)(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
            backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
            backendAzureRmStorageAccountName: 'devtfstatespetclinic'
            backendAzureRmContainerName: 'terraformstaefiles'
