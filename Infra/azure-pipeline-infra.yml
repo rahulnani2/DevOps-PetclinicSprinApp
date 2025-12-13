@@ -96,7 +96,7 @@ stages:
          displayName: 'Terraform Apply'
          inputs:
            provider: 'azurerm'
-           command: 'destroy'
+           command: 'apply'
            workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
            commandOptions: 
               -var "subscription_id=$(SUBSCRIPTION_id)"
