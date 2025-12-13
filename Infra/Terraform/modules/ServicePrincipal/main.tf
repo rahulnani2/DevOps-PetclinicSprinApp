@@ -1,3 +1,5 @@
+/* 
+
 data "azuread_client_config" "azclconfig01" {}
 
 resource "azuread_application" "azapp01" {
@@ -33,4 +35,4 @@ resource "azuread_service_principal_password" "azadsppasswd01" {
    rotate_when_changed = {
      rotation = timestamp()
    }
-}
+}  */ 
