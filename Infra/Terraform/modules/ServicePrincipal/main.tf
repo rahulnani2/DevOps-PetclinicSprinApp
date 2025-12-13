@@ -12,7 +12,6 @@ resource "azuread_application" "azapp01" {
 
 
 resource "azuread_service_principal" "azadsp01" {
- #  depends_on = [time_sleep.wait_for_application, azuread_application.azapp01]
    app_role_assignment_required = true
    client_id = azuread_application.azapp01.client_id
    use_existing = true
