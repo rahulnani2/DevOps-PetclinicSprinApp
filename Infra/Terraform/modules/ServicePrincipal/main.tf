@@ -4,7 +4,7 @@ data "azuread_client_config" "azclconfig01" {}
 
 resource "azuread_application" "azapp01" {
    display_name = var.service_principal_name
-   owners = [ data.azuread_client_config.azclconfig01.object_id]
+ #  owners = [ data.azuread_client_config.azclconfig01.object_id]
 }
 
 resource "azuread_service_principal" "azadsp01" {
