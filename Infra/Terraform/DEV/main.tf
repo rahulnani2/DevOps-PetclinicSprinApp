@@ -44,7 +44,6 @@ module "ServicePrinicpal01" {
 
 
 module "petclinicacr" {
-  depends_on = [module.ServicePrinicpal01]
    source = "../modules/acr"
    acr_name = "petclinicimages"
    resource_group_name = azurerm_resource_group.pgrg01.name
@@ -68,5 +67,10 @@ resource "local_file" "kubeconfig" {
   content = module.AKSCluster01.config
 }
 
-
+resource "azurerm_role_assignment" "azacrpullrole" {
+  principal_id = module.AKSCluster01.aks_pricinipal_id
+  scope = module.petclinicacr.acr_id
+  role_definition_name = "AcrPull"
+  skip_service_principal_aad_check = true
+} 
 
