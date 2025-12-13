@@ -3,13 +3,16 @@
 data "azuread_client_config" "azclconfig01" {}
 
 resource "azuread_application" "azapp01" {
-   display_name = var.service_principal_name
- #  owners = [ data.azuread_client_config.azclconfig01.object_id]
+   display_name = var.service_principal_name 
+ #  owners = [ data.azuread_client_config.azclconfig01.object_id] 
+  lifecycle {
+    ignore_changes = [ owners ]
+  }
 }
 
+
 resource "azuread_service_principal" "azadsp01" {
-   depends_on = [ time_sleep.wait_for_app ]
-   #app_role_assignment_required = true
+   app_role_assignment_required = true
    client_id = azuread_application.azapp01.client_id
    use_existing = true
    timeouts{ 
