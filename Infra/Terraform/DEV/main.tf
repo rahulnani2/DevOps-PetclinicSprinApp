@@ -42,6 +42,7 @@ module "ServicePrinicpal01" {
 }  **/
 
 module "petclinicacr" {
+  depends_on = [module.ServicePrinicpal01]
    source = "../modules/acr"
    acr_name = "petclinicimages"
    resource_group_name = azurerm_resource_group.pgrg01.name
