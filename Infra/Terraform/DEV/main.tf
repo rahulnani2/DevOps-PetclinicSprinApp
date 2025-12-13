@@ -58,9 +58,6 @@ module "AKSCluster01" {
    kubernetes_version = "1.33.5"
    aks_subnet_id = module.networkModule.subnet_id[var.aksnodepool_subnet]
    tags = local.requiredTags
-  # service_principle_name = module.ServicePrinicpal01.service_principle_name
-  # client_id = module.ServicePrinicpal01.client_id
-  # client_secret = module.ServicePrinicpal01.client_secret
 } 
 
 resource "local_file" "kubeconfig" {
