@@ -12,7 +12,7 @@ resource "azuread_application" "azapp01" {
 
 resource "time_sleep" "wait_for_app" {
    depends_on = [ azuread_application.azapp01 ]
-   create_duration = "60s"
+   create_duration = "90s"
 }
 
 resource "azuread_service_principal" "azadsp01" {
