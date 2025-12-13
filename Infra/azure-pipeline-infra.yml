@@ -77,6 +77,8 @@ stages:
    - deployment: TerraformDestroy
      displayName: 'Manual Destroy'
      environment: 'manual-destroy-env'
+     pool:
+      name: SelfHostedPool
      strategy:
       runOnce:
         deploy:
