@@ -17,7 +17,7 @@ resource "time_sleep" "wait_for_app" {
 
 resource "azuread_service_principal" "azadsp01" {
    depends_on = [ time_sleep.wait_for_app ]
-   app_role_assignment_required = true
+   #app_role_assignment_required = true
    client_id = azuread_application.azapp01.client_id
    use_existing = true
    timeouts{ 
