@@ -55,6 +55,7 @@ stages:
          inputs:
           terraformVersion: 'latest'
        - task: TerraformTask@5
+         displayName: 'Initialize Terraform' 
          inputs:
            provider: 'azurerm'
            command: 'init'
@@ -66,6 +67,7 @@ stages:
            backendAzureRmContainerName: 'terraformstaefiles'
            backendAzureRmKey: 'dev-petclinicstatefile01.tfstate'
        - task: TerraformTask@5
+         displayName: 'Validate Terraform Configuration'
          inputs:
            provider: 'azurerm'
            command: 'validate'
@@ -78,6 +80,7 @@ stages:
         name: SelfHostedPool  
       steps: 
        - task: TerraformInstaller@1
+
          inputs:
           terraformVersion: 'latest'
        - task: TerraformTask@5
