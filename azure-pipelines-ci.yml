@@ -18,7 +18,6 @@ variables:
 # Step-4 
 stages:
 - stage: Build
-   displayName: 'Build and Dockerize Spring Boot App'
   jobs:
    - job: BuildDocker
      displayName: 'Build, Docker and Push the image to ACR'
@@ -36,5 +35,10 @@ stages:
           mavenAuthenticateFeed: false
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
+          
+      - task: DockerInstaller@0
+        inputs:
+          dockerVersion: '17.09.0-ce'
+
             
 
