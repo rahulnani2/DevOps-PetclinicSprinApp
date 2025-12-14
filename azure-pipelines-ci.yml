@@ -44,6 +44,6 @@ stages:
           containerRegistry: 'Azure-ACR-ServiceConnection'
           repository: 'petclinicimages.azurecr.io/petclinic-app'
           command: 'buildAndPush'
-          Dockerfile: '**/Dockerfile'
+          Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
             
 
