@@ -35,6 +35,7 @@ stages:
           mavenAuthenticateFeed: false
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
+<<<<<<< HEAD
           
       - task: DockerInstaller@0
         inputs:
@@ -45,5 +46,7 @@ stages:
           repository: 'petclinicimages.azurecr.io/petclinic-app'
           command: 'buildAndPush'
           Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
+=======
+>>>>>>> 153d0d0 (Set up CI with Azure Pipelines)
             
 
