@@ -1,4 +1,4 @@
-output "service_principle_name" {
+/* output "service_principle_name" {
   description = "The Object_id of a servicepricipal name"
   value = azuread_service_principal.azadsp01.display_name
 } 
@@ -21,4 +21,4 @@ output "client_id" {
 output "client_secret" {
    description = "Service Prinicpal Secret"
    value = azuread_service_principal_password.azadsppasswd01.value
-}
+} */

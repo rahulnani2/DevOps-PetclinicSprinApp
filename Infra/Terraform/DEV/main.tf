@@ -35,10 +35,11 @@ output "network_details" {
     value = module.networkModule.subnet_id
 }
 
+/** -- Removed Service Prinicpal 
 module "ServicePrinicpal01" {
    source = "../modules/ServicePrincipal"
     service_principal_name = "dev-petclinic-sp01"
-}
+}  **/
 
 module "petclinicacr" {
    source = "../modules/acr"
@@ -47,15 +48,9 @@ module "petclinicacr" {
    location = azurerm_resource_group.pgrg01.location
 } 
 
-resource "azurerm_role_assignment" "azacrpullrole" {
-  scope = module.petclinicacr.acr_id
-  role_definition_name = "AcrPull"
-  principal_id = module.ServicePrinicpal01.service_principal_objectid
-}
 
 module "AKSCluster01" {
-   depends_on = [ module.networkModule, module.petclinicacr, module.ServicePrinicpal01 ]
-   
+   depends_on = [ module.networkModule, module.petclinicacr ]
    source = "../modules/aks"
    resource_group_name = azurerm_resource_group.pgrg01.name
    location = azurerm_resource_group.pgrg01.location
@@ -63,9 +58,6 @@ module "AKSCluster01" {
    kubernetes_version = "1.33.5"
    aks_subnet_id = module.networkModule.subnet_id[var.aksnodepool_subnet]
    tags = local.requiredTags
-   service_principle_name = module.ServicePrinicpal01.service_principle_name
-   client_id = module.ServicePrinicpal01.client_id
-   client_secret = module.ServicePrinicpal01.client_secret
 } 
 
 resource "local_file" "kubeconfig" {
@@ -73,5 +65,10 @@ resource "local_file" "kubeconfig" {
   content = module.AKSCluster01.config
 }
 
-
+resource "azurerm_role_assignment" "azacrpullrole" {
+  principal_id = module.AKSCluster01.aks_pricinipal_id
+  scope = module.petclinicacr.acr_id
+  role_definition_name = "AcrPull"
+  skip_service_principal_aad_check = true
+} 
 

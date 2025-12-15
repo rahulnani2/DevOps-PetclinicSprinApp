@@ -9,6 +9,12 @@ output "aks_cluster_id" {
     
     }
 
+output "aks_pricinipal_id" {
+  description = "AKS pricinipal ID"
+   value = azurerm_kubernetes_cluster.azaksclu01.kubelet_identity[0].object_id
+}
+
+
 output "config" {
 value = azurerm_kubernetes_cluster.azaksclu01.kube_config_raw
 }

@@ -40,7 +40,7 @@ variable "tags" {
   description = "Required tags for the Kubernetes cluster creation"
 }
 
-variable "service_principle_name" {
+/* variable "service_principle_name" {
   type = string
   description = "Name of the service prinicipal to be addigned to the cluster "
 }  
@@ -52,7 +52,7 @@ variable "client_id" {
 variable "client_secret" {
   sensitive = true
   type = string
-}
+} */
 
 
 # variable "azureacr_id" {

@@ -10,10 +10,13 @@ resource "azurerm_kubernetes_cluster" "azaksclu01" {
         vm_size = var.vm_size
         vnet_subnet_id = var.aks_subnet_id
         }
-  service_principal {    
+  identity {  
+    type = "SystemAssigned"
+    }    
+ /* service_principal {    
     client_id = var.client_id 
     client_secret = var.client_secret
-     }     
+     }     */
   tags = var.tags     
 
    network_profile {
