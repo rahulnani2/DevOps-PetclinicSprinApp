@@ -28,7 +28,7 @@ stages:
            command: 'init'
            workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
            backendAzureRmUseEntraIdForAuthentication: false
-           backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+           backendServiceArm: 'Azure subscription'
            backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
            backendAzureRmStorageAccountName: 'devtfstatespetclinic'
            backendAzureRmContainerName: 'terraformstaefiles'
@@ -54,7 +54,7 @@ stages:
            command: 'init'
            workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
            backendAzureRmUseEntraIdForAuthentication: false
-           backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+           backendServiceArm: 'Azure subscription 1'
            backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
            backendAzureRmStorageAccountName: 'devtfstatespetclinic'
            backendAzureRmContainerName: 'terraformstaefiles'
@@ -67,7 +67,7 @@ stages:
            commandOptions: 
               -var "subscription_id=$(SUBSCRIPTION_id)"
               --auto-approve
-           environmentServiceNameAzureRM: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'  
+           environmentServiceNameAzureRM: 'Azure subscription '  
 - stage: ResourceDestroy
   displayName: 'Manual Trigger to Destroy terraform resources'
   jobs:
@@ -87,7 +87,7 @@ stages:
            command: 'init'
            workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
            backendAzureRmUseEntraIdForAuthentication: false
-           backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+           backendServiceArm: 'Azure subscription '
            backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
            backendAzureRmStorageAccountName: 'devtfstatespetclinic'
            backendAzureRmContainerName: 'terraformstaefiles'
@@ -100,4 +100,4 @@ stages:
            commandOptions: 
              -var "subscription_id=$(SUBSCRIPTION_id)" 
              --auto-approve
-           environmentServiceNameAzureRM: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+           environmentServiceNameAzureRM: 'Azure subscription '
