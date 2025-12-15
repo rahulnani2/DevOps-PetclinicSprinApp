@@ -23,6 +23,7 @@ stages:
       pool:
        name: SelfHostedPool
       steps: 
+<<<<<<< HEAD
        - task: TerraformInstaller@1
          displayName: 'Terrafom Install on the hosted agent'
          inputs:
@@ -53,6 +54,27 @@ stages:
         name: SelfHostedPool  
       steps: 
        - task: TerraformInstaller@1
+=======
+      - task: TerraformInstaller@1
+        inputs:
+          terraformVersion: 'latest'
+      - task: TerraformTask@5
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+          backendAzureRmUseEntraIdForAuthentication: false
+          backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+          backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
+          backendAzureRmStorageAccountName: 'devtfstatespetclinic'
+          backendAzureRmContainerName: 'terraformstaefiles'
+          backendAzureRmKey: 'dev-petclinicstatefile.tfstate'
+      - task: TerraformTask@5
+        inputs:
+          provider: 'azurerm'
+          command: 'validate'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+>>>>>>> 24da9a7 (Set up CI with Azure Pipelines)
 
          inputs:
           terraformVersion: 'latest'
