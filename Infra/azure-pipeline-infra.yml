@@ -19,6 +19,7 @@ stages:
       pool:
        name: SelfHostedPool
       steps: 
+<<<<<<< HEAD
        - task: TerraformInstaller@1
          displayName: 'Terrafom Install on the hosted agent'
          inputs:
@@ -31,6 +32,36 @@ stages:
            workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
            backendAzureRmUseEntraIdForAuthentication: false
            backendServiceArm: 'Azure subscription 1'
+           backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
+           backendAzureRmStorageAccountName: 'devtfstatespetclinic'
+           backendAzureRmContainerName: 'terraformstaefiles'
+           backendAzureRmKey: 'dev-petclinicstatefile01.tfstate'
+       - task: TerraformTask@5
+         displayName: 'Validate Terraform Configuration'
+         inputs:
+           provider: 'azurerm'
+           command: 'validate'
+           workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+- stage: Dev_deploy
+  condition: succeeded()
+  jobs: 
+    - job: terrafom_apply_dev
+      pool:
+        name: SelfHostedPool  
+      steps: 
+        - task: TerraformInstaller@1
+=======
+      - task: TerraformInstaller@1
+         inputs:
+          terraformVersion: 'latest'
+       - task: TerraformTask@5
+         displayName: 'Initialize Terraform' 
+         inputs:
+           provider: 'azurerm'
+           command: 'init'
+           workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+           backendAzureRmUseEntraIdForAuthentication: false
+           backendServiceArm: 'Azure subscription 1(1)(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
            backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
            backendAzureRmStorageAccountName: 'devtfstatespetclinic'
            backendAzureRmContainerName: 'terraformstaefiles'
@@ -73,7 +104,7 @@ stages:
            commandOptions: 
               -var "subscription_id=$(SUBSCRIPTION_id)"
               --auto-approve
-           environmentServiceNameAzureRM: 'Azure subscription 1'  
+           environmentServiceNameAzureRM: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'  
 
 - stage: Dev_DestroyTerraformResource
   displayName: 'Manual trigger to destroy Terraform resources'
@@ -98,7 +129,7 @@ stages:
                command: 'init'
                workingDirectory: 'System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
                backendAzureRmUseEntraIdForAuthentication: false
-               backendServiceArm: 'Azure subscription'
+               backendServiceArm: 'Azure subscription 1(2)(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
                backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
                backendAzureRmStorageAccountName: 'devtfstatespetclinic'
                backendAzureRmContainerName: 'terraformstaefiles'
@@ -111,4 +142,4 @@ stages:
                commandOptions: 
                  -var "subscription_id=$(SUBSCRIPTION_id)"
                  --auto-approve
-               environmentServiceNameAzureRM: 'Azure subscription'
+               environmentServiceNameAzureRM: 'Azure subscription 1(1)(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'

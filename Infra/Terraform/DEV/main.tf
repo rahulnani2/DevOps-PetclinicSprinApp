@@ -36,10 +36,12 @@ output "network_details" {
 }
 
 /** -- Removed Service Prinicpal 
+/** -- Removed Service Prinicpal 
 module "ServicePrinicpal01" {
    source = "../modules/ServicePrincipal"
     service_principal_name = "dev-petclinic-sp01"
 }  **/
+
 
 module "petclinicacr" {
    source = "../modules/acr"
@@ -65,10 +67,5 @@ resource "local_file" "kubeconfig" {
   content = module.AKSCluster01.config
 }
 
-resource "azurerm_role_assignment" "azacrpullrole" {
-  principal_id = module.AKSCluster01.aks_pricinipal_id
-  scope = module.petclinicacr.acr_id
-  role_definition_name = "AcrPull"
-  skip_service_principal_aad_check = true
-} 
+
 

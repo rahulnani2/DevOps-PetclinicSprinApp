@@ -1,0 +1,49 @@
+# Step-1 Define triggers for automatic triggering the pipeline when code is pushed
+trigger:
+  branches:
+    include:
+      - main
+      - feature/*
+# Step-2 Define the agent pool to run the pipelines
+pool:
+  name: SelfHostedPool
+
+# Step-3 Define variables for the Azure Container Registry
+variables:
+  ACR_NAME: 'petclinicimages'
+  IMAGE_NAME: 'petclinicimages.azurecr.io/petclinic-app'
+  IMAGE_TAG:  '$(Build.BuildId)'
+  DOCKER_REGISTRY_SERVICE_CONNECTION: 'Azure-ACR-ServiceConnection'
+
+# Step-4 
+stages:
+- stage: Build
+  jobs:
+   - job: BuildDocker
+     displayName: 'Build, Docker and Push the image to ACR'
+     steps: 
+      - checkout: self   # Pulls the source code from Git into agent workspace , Self - means current repo triggering the pipeline
+      - task: Maven@4
+        inputs:
+          azureSubscription: 'Azure subscription 1(3)(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+          mavenPomFile: 'pom.xml'
+          goals: 'clean package'
+          options: '-DskipTests=true'
+          publishJUnitResults: false
+          javaHomeOption: 'JDKVersion'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: false
+          
+      - task: DockerInstaller@0
+        inputs:
+          dockerVersion: '17.09.0-ce'
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'Azure-ACR-ServiceConnection'
+          repository: 'petclinicimages.azurecr.io/petclinic-app'
+          command: 'buildAndPush'
+          Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
+            
+
