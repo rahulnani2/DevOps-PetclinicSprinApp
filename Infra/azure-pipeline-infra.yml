@@ -54,24 +54,30 @@ stages:
       - task: TerraformInstaller@1
          inputs:
           terraformVersion: 'latest'
-      - task: TerraformTask@5
-        inputs:
-          provider: 'azurerm'
-          command: 'init'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
-          backendAzureRmUseEntraIdForAuthentication: false
-          backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
-          backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
-          backendAzureRmStorageAccountName: 'devtfstatespetclinic'
-          backendAzureRmContainerName: 'terraformstaefiles'
-          backendAzureRmKey: 'dev-petclinicstatefile.tfstate'
-      - task: TerraformTask@5
-        inputs:
-          provider: 'azurerm'
-          command: 'validate'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
->>>>>>> 24da9a7 (Set up CI with Azure Pipelines)
-
+       - task: TerraformTask@5
+         inputs:
+           provider: 'azurerm'
+           command: 'init'
+           workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+           backendAzureRmUseEntraIdForAuthentication: false
+           backendServiceArm: 'Azure subscription 1(6e7256d2-7049-4f1c-a8a9-c31e1da9d40a)'
+           backendAzureRmResourceGroupName: 'terraform-stfiles-rg01'
+           backendAzureRmStorageAccountName: 'devtfstatespetclinic'
+           backendAzureRmContainerName: 'terraformstaefiles'
+           backendAzureRmKey: 'dev-petclinicstatefile.tfstate'
+       - task: TerraformTask@5
+         inputs:
+           provider: 'azurerm'
+           command: 'validate'
+           workingDirectory: '$(System.DefaultWorkingDirectory)/Infra/Terraform/DEV'
+- stage: Dev_deploy
+  condition: succeeded()
+  jobs: 
+    - job: terrafom_apply_dev
+      pool:
+        name: SelfHostedPool  
+      steps: 
+       - task: TerraformInstaller@1
          inputs:
           terraformVersion: 'latest'
        - task: TerraformTask@5
