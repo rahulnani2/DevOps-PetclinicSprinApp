@@ -41,7 +41,7 @@ module "ServicePrinicpal01" {
    source = "../modules/ServicePrincipal"
     service_principal_name = "dev-petclinic-sp01"
 }  **/
-}  **/
+
 
 module "petclinicacr" {
    source = "../modules/acr"
