@@ -36,10 +36,14 @@ stages:
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2fc90d4 (Update azure-pipelines-ci.yml for Azure Pipelines)
           
       - task: DockerInstaller@0
         inputs:
           dockerVersion: '17.09.0-ce'
+<<<<<<< HEAD
       - task: Docker@2
         inputs:
           containerRegistry: 'Azure-ACR-ServiceConnection'
@@ -48,5 +52,8 @@ stages:
           Dockerfile: '$(System.DefaultWorkingDirectory)/Dockerfile'
 =======
 >>>>>>> 153d0d0 (Set up CI with Azure Pipelines)
+=======
+
+>>>>>>> 2fc90d4 (Update azure-pipelines-ci.yml for Azure Pipelines)
             
 
